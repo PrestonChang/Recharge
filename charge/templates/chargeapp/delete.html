@@ -1,0 +1,20 @@
+{% extends "chargeapp/base.html" %}
+
+{% block content %}
+<form action="/chargeapp/delete/" method="post">
+    {% csrf_token %}
+    <input type="submit" name="delete_cs" value="Delete Charging Stations" />
+    <input type="submit" name="delete_upload" value="Delete Uploads" />
+    <input type="submit" name="delete_admin" value="Delete Admin Uploaded Charging Stations"/>
+    <input type="submit" name="delete_user" value="Delete User Uploaded Charging Stations"/>
+</form>
+
+{% if messages %} 
+<ul class="messages">
+	{% for message in messages %} 
+		{{ message }} 
+	{% endfor %} 
+</ul>
+{% endif %}
+
+{% endblock %}

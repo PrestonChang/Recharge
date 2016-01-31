@@ -1,0 +1,26 @@
+{% extends "chargeapp/base.html" %}
+
+{% block content %}
+<h1 style="text-align:center">LOGIN</h1>
+<hr/>
+<form action="/chargeapp/login/" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+<br>
+{% if messages %} 
+<ul class="messages">
+	{% for message in messages %} 
+		{{ message }} 
+	{% endfor %} 
+</ul>
+{% endif %}
+
+
+<br/>
+<form action="/chargeapp/create-user">
+    <p>Don't have an account? Click <input type="submit" value="here"> to get one!</p>
+</form>
+
+{% endblock %}

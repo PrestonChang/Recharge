@@ -1,0 +1,29 @@
+{% extends "chargeapp/base.html" %}
+
+{% block content %}
+<h1>User profile for {{ username }}.
+{% if user.is_superuser %}
+You are an admin!
+{% endif %}</h1>
+<p>Current User preferences<br/>
+    Sidebar colour: {{ sidebar_colour }}<br/>
+    Admin Data Only?: {{ admin_data_only }}</p><br/>
+
+<h3>Change User Preferences</h3>
+
+<form action="/chargeapp/profile/" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+
+{% if messages %} 
+<ul class="messages">
+    {% for message in messages %} 
+        {{ message }} 
+    {% endfor %} 
+</ul>
+{% endif %}
+
+
+{% endblock %}

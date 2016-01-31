@@ -1,0 +1,33 @@
+{% extends "chargeapp/base.html" %}
+
+{% block content %}
+
+<h1 style="text-align:center">FACEBOOK</h1>
+<hr/>
+
+<p>
+	
+	{% if user.is_authenticated and not user.is_anonymous %}
+	<p align="center">
+		<b><i>Welcome, {{ user.get_full_name|default:user.username }}!</i></b>
+	</p>
+	<br>
+	<p align="center">
+	<span class='st_facebook_large' displayText='Facebook'></span></p>
+	<div align="center">
+	<form action="postfb" align="center">
+		<input type="submit" value="Share Charging Station to Facebook">
+	</form></div>
+	<p align="center">
+		<a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
+	</p>
+	{% else %}
+
+	<p align="center">
+		<a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
+	</p>
+	{% endif %}
+</p>
+
+
+{% endblock %}

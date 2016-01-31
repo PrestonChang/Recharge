@@ -1,0 +1,35 @@
+{% extends "chargeapp/base.html" %}
+
+{% block content %}
+
+
+<h1 style="text-align:center">LIST OF CHARGING STATIONS</h1>
+<hr/>
+{% if charging_stations %}
+<form action="/chargeapp/filterCOVList">
+    <input type="submit" value="City of Vancouver stations only">
+</form>
+	<table border="1" style="width:75%">
+		<tr>
+			<th>ID</th>
+			<th>Operator</th>
+			<th>Address</th>
+			<th>Latitude</th>
+			<th>Longitude</th>
+			<th>In Use</th>
+		</tr>
+		{% for station in charging_stations %}
+		<tr>
+			<td>{{ station.id }}</td>
+			<td>{{ station.operator }}</td>
+			<td>{{ station.address }}</td>
+			<td>{{ station.lat }}</td>
+			<td>{{ station.lon }}</td>
+			<td>{{ station.inUse }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+{% else %}
+	<p>No stations available.</p>
+{% endif %}
+{% endblock %}

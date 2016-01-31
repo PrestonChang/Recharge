@@ -1,0 +1,1 @@
+web: gunicorn charge.wsgi --log-file -

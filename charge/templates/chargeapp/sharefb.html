@@ -1,0 +1,47 @@
+{% extends "chargeapp/base.html" %}
+
+{% block content %}
+<head>
+	<br>
+	{% if station == "" %}
+	<p><i>You have not chosen a station.</i> Share our app anyway!</p>
+	{% else %}
+	<p>You have chosen station <b>{{station}}</b>. Share it now!</p>
+	{% endif %}
+	<br>
+	<br>
+	<h1 align="center">
+	<a href="/chargeapp/">
+		Back to CHARGE
+	</a></h1>
+</head>
+
+<body>
+	<script>
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId      : '1744880872402067',
+			status	   : true,
+			xfbml      : true,
+			version    : 'v2.5'
+		});
+		FB.ui(
+		{
+			method: 'share',
+			href: 'https://gentle-mesa-6732.herokuapp.com/chargeapp/'
+		}, function(response){});
+	};
+
+
+	(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+
+</body>
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends "chargeapp/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<form id="form" onsubmit="return false;">
+    <label for="latitude">Latitude</label>
+    <input style="position:absolute; top:90%; left:1%; width:10%;" type="text" id="latitude" />
+    <label for="longitude">Longitude</label>
+    <input style="position:absolute; top:90%; left:12%; width:10%;" type="text" id="longitude" />
+    <label for="longitude">Range</label>
+    <input style="position:absolute; top:90%; left:23%; width:10%;" type="text" id="range" />
+    <input style="position:absolute; top:90%; left:34%; width:10%;" type="submit" onclick="filter();" />
+</form>
+
+<div id="googleMap" style="position:absolute; top:250%; left:0%; width:100%;min-width:600px;min-height:700px;"></div>
+
+<script src="http://maps.googleapis.com/maps/api/js?libraries=geometry"></script>
+<script>
+
+var map;
+var allMarkers = [];
+
+function initialize() {
+  var mapProp = {
+    center:new google.maps.LatLng(49.2827,-123.1207),
+    zoom:12,
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+  map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+  addMarkers(map);
+  displayMarkers(allMarkers);
+  displayChargingStations();
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+//get all the charging station markers
+function addMarkers(map){  
+
+  var infowindow = new google.maps.InfoWindow();
+
+  {% for station in charging_stations %}
+
+    var point = new google.maps.LatLng({{station.lat}},{{station.lon}});
+
+    var info = "<p>Operator: {{station.operator}}</p>" +
+               "<p>Address: {{station.address}}</p>" +
+               "<p>In Use: {{station.inUse}}</p>";
+
+    var marker = new google.maps.Marker({
+      position: point,
+      title: info
+    });
+
+    marker.addListener('click', function() {
+      infowindow.setContent(this.title);
+      infowindow.open(map,this);
+    });
+
+    allMarkers.push(marker);
+
+  {% endfor %}
+
+}
+
+function setMapOnAll(map, markers) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+function displayMarkers(markers) {
+  setMapOnAll(map, markers);
+}
+
+//might have removed all the markers
+function clearAllMarkers() {
+  setMapOnAll(null, allMarkers);
+}
+
+function filter() {
+    var userLatitude = document.getElementById("latitude").value;
+    var userLongitude = document.getElementById("longitude").value;
+    var range = document.getElementById("range").value;
+
+    var userLatLng = new google.maps.LatLng(userLatitude,userLongitude);
+
+    var filteredMarkers = [];
+
+    for (var i = 0; i < allMarkers.length; i++) {
+  
+      var distance = google.maps.geometry.spherical.computeDistanceBetween(userLatLng, allMarkers[i].position, 6371);
+
+      if (distance <= range) {
+        filteredMarkers.push(allMarkers[i]);
+        
+      }  
+    
+      clearAllMarkers();
+      displayMarkers(filteredMarkers); 
+
+    }
+
+}
+
+</script>
+
+
+
+
+
+
+{% endblock %}

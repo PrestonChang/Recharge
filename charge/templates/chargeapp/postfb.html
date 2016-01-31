@@ -1,0 +1,34 @@
+{% extends "chargeapp/base.html" %}
+
+{% block content %}
+
+<form action="/chargeapp/facebook/postfb/" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+
+{% if charging_stations %}
+	<table border="1" style="width:50%">
+		<tr>
+			<th>ID</th>
+			<th>Operator</th>
+			<th>Address</th>
+			<th>Latitude</th>
+			<th>Longitude</th>
+		</tr>
+		{% for station in charging_stations %}
+		<tr>
+			<td align="center">{{ station.id }}</td>
+			<td align="center">{{ station.operator }}</td>
+			<td align="center">{{ station.address }}</td>
+			<td align="center">{{ station.lat }}</td>
+			<td align="center">{{ station.lon }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+{% else %}
+	<p>No stations available.</p>
+
+{% endif %}
+{% endblock %}
