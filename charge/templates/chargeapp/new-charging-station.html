@@ -1,8 +1,6 @@
 {% extends "chargeapp/base.html" %}
 
 {% block content %}
-<h1 style="text-align:center">ADD NEW CHARGING STATION</h1>
-<hr/>
 <form action="/chargeapp/new-charging-station/" method="post">
     {% csrf_token %}
     {{ form.as_p }}

@@ -1,0 +1,44 @@
+{% extends "chargeapp/base.html" %}
+
+{% block content %}
+  {% load static %}
+  <script src="https://maps.google.com/maps/api/js?"></script>
+  <script src="{% static "js/filter.js" %}"></script>
+  <script>
+
+    var stations = [];
+    var latitudes = [];
+    var longitudes = [];
+    var addresses = [];
+    var operators = [];
+
+    {% for station in charging_stations %}
+
+      stations.push("{{station}}");
+      latitudes.push("{{station.lat}}");
+      longitudes.push("{{station.lon}}");
+      addresses.push("{{station.address}}");
+      operators.push("{{station.operator}}");
+
+
+    {% endfor %}
+
+    // function printStations() {
+    //   var station1 = stations[0];
+    //   return "<p> Here is a list of stations in the template file: " + stations[0] + " " +  stations[1] + "</p>" +
+    //           "<p> This is how big the array is: " + stations.length + "</p>";
+    // }
+ 
+    // document.body.innerHTML = printStations();
+
+    /*
+    function initialize() {
+        var mapCanvas = document.getElementById("map");
+        var googleMap = new Mapping.GoogleMap(mapCanvas); //this is not working
+    }
+    */
+  //<body onload="initialize()">
+  </script>
+  <div id="maps" style="min-width:600px;min-height:800px;"></div>
+
+{% endblock %}

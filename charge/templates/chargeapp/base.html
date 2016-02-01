@@ -22,133 +22,87 @@
 
     <link href="{% static "css/custom.css" %}" rel="stylesheet">
 
-
-    <!-- script tags for sharing to fb and twitter -->
-    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-    <script type="text/javascript">stLight.options({publisher: "1957bfb8-c240-463d-b8b0-beab7c8ad583", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
-
-
 </head>
 <body>
-    <div id="wrapper">
+    <div class="nav">
+        <div class="container">
+            <ul class="pull-left">
+                <li class="icon-menu"><a>Menu</a></li>
+                <li><a href="/chargeapp/maps">Recharge</a></li>
+            </ul>
+            <ul class="pull-right">
+                <li><a href="/chargeapp/create-user">Sign Up</a></li>
+                <li><a href="/chargeapp/login">Login</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="menu">
+        <div id="wrapper">
 
-        <!-- Sidebar -->
-        {% if user.is_authenticated %}
-            {% with user_colour=user.userprofile.sidebar_colour|lower %}
+            <!-- Sidebar -->
+            {% if user.is_authenticated %}
+                {% with user_colour=user.userprofile.sidebar_colour|lower %}
 
-            {% if user_colour == 'blu' %}
-                <div id="sidebar-wrapper" style="background: #1A4459">
-            {% elif user_colour == 'gry' %}
-                <div id="sidebar-wrapper" style="background: #292929">
-            {% elif user_colour == 'red' %}
-                <div id="sidebar-wrapper" style="background: #D94236">
-            {% elif user_colour == 'grn' %}
-                <div id="sidebar-wrapper" style="background: #6CA633">
+                {% if user_colour == 'blu' %}
+                    <div id="sidebar-wrapper" style="background: #1A4459">
+                {% elif user_colour == 'gry' %}
+                    <div id="sidebar-wrapper" style="background: #292929">
+                {% elif user_colour == 'red' %}
+                    <div id="sidebar-wrapper" style="background: #D94236">
+                {% elif user_colour == 'grn' %}
+                    <div id="sidebar-wrapper" style="background: #6CA633">
+                {% else %}
+                    <div id="sidebar-wrapper" style="background: #000000">
+                {% endif %}
+
+                {% endwith %}
             {% else %}
                 <div id="sidebar-wrapper" style="background: #000000">
             {% endif %}
 
-            {% endwith %}
-        {% else %}
-            <div id="sidebar-wrapper" style="background: #000000">
-        {% endif %}
-
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="/chargeapp/" style="color: #FFFFFF">
-                        CHARGE
-                    </a>
-                </li>
-                {% if user.is_authenticated %}
-                    <li>
-                        <form action="/chargeapp/profile">
-                            <input type="submit" value="My Profile">
-                        </form>
-                    </li>
-                    {% if user.is_superuser %}
-                    <li>
-                        <form action="/chargeapp/upload">
-                            <input type="submit" value="Upload file">
-                        </form>
-                    </li>
-                    <li>
-                    <form action="/chargeapp/delete">
-                        <input type="submit" value="Deletion">
-                    </form>
-                </li>
+                <ul class="sidebar-nav">
+                    <div class="icon-close">
+                        <img src="http://i.stack.imgur.com/vDH0q.png"> <!--Replace img source -->
+                    </div>
+                    {% if user.is_authenticated %}
+                        <li><a href="/chargeapp/profile">My Profile</a></li>
+                        {% if user.is_superuser %}
+                        <li><a href="/chargeapp/upload">Upload file</a></li>
+                        <li><a href="/chargeapp/delete">Deletion</a></li>
+                        {% endif %}
+                        <hr/>
                     {% endif %}
-                    <hr/>
-                {% endif %}
-                <li>
-                    <form action="/chargeapp/maps">
-                        <input type="submit" value="Map all charging stations">
-                    </form>
-                </li>
-                <li>
-                    <form action="/chargeapp/list">
-                        <input type="submit" value="List all charging stations">
-                    </form>
-                </li>
-                <li>
-                    <form action="/chargeapp/twitter">
-                        <input type="submit" value="Post to Twitter">
-                    </form>
-                </li>
-                <li>
-                    <form action="/chargeapp/facebook">
-                        <input type="submit" value="Post to Facebook">
-                    </form>
-                </li>
-                <li>
-                    <form action="/chargeapp/privacy">
-                        <input type="submit" value="Privacy Policy">
-                    </form>
-                </li>
-                {% if not user.is_authenticated %}
-                <li>
-                    <form action="/chargeapp/login">
-                        <input type="submit" value="Login">
-                    </form>
-                </li>
-                {% endif %}
-                {% if user.is_authenticated %}
-                <li>
-                    <form action="/chargeapp/new-charging-station">
-                        <input type="submit" value="Add a New Charging Station">
-                    </form>
-                </li>
-                <li>
-                    <form action="/chargeapp/use-charging-station">
-                        <input type="submit" value="Use Charging Station">
-                    </form>
-                </li>
-                <li>
-                    <form action="/chargeapp/logoutuser">
-                        <input type="submit" value="Logout">
-                    </form>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
+                    <li><a href="/chargeapp/maps">Map all charging stations</a></li>
+                    <li><a href="/chargeapp/list">List all charging stations</a></li>
+                    <li><a href="/chargeapp/new-charging-station">Add a new charging station</a></li>
+                    <li><a href="/chargeapp/login">Login</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="/chargeapp/use-charging-station">Use charging stations</a></li>
+                    <li><a href="/chargeapp/logout">Logout</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <!-- /#sidebar-wrapper -->
 
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+    
 {% block content %}
 {% endblock %}
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- /#page-content-wrapper -->
+            <!-- /#page-content-wrapper -->
 
+        </div>
+        <!-- /#wrapper -->
     </div>
-    <!-- /#wrapper -->
+    <!-- menu -->
 
     <!-- jQuery -->
     <script src="{% static "js/jquery.js" %}"></script>
@@ -163,5 +117,7 @@
         $("#wrapper").toggleClass("toggled");
     });
     </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static "js/app.js" %}"></script>
 </body>
 </html>

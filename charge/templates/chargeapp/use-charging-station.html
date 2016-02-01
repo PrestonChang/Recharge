@@ -1,14 +1,11 @@
 {% extends "chargeapp/base.html" %}
 
 {% block content %}
-<h1 style="text-align:center">USE CHARGING STATION</h1>
-<hr/>
 <form action="/chargeapp/use-charging-station/" method="post">
     {% csrf_token %}
 	{{ form.as_p }}
     <input type="submit" value="Submit" />
-<br>
-<br>
+
 {% if messages %}
 <ul class="messages">
 	{% for message in messages %}

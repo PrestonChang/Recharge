@@ -1,11 +1,9 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db.models.signals import pre_delete, post_save
 from django.dispatch.dispatcher import receiver
 from django.contrib.auth.models import User
 import csv
-import json
 import os
 from django.utils import timezone
 
@@ -53,51 +51,21 @@ class Upload(models.Model):
 
     docfile = models.FileField(upload_to='documents/', validators=[validate_file_extension, validate_file_size])
 
-    def parse(self):
-        upload_path = os.path.abspath('media/' + self.docfile.name).replace("\\", "/")
-        json_object = []
-        with open(upload_path) as csv_file:
-            for row in csv.DictReader(csv_file):
-                json_object.append({
-                    "LATITUDE": row['LATITUDE'],
-                    "LONGITUDE": row['LONGITUDE'],
-                    "LOT_OPERATOR": row['LOT_OPERATOR'],
-                    "ADDRESS": row['ADDRESS']
-                })
-        output_json = json.dumps(json_object)
-        return output_json
-
-    def import_parsed(self, json_object):
-        for object in json.loads(json_object):
-            ChargingStation.objects.get_or_create(
-                lat=object['LATITUDE'],
-                lon=object['LONGITUDE'],
-                operator=object['LOT_OPERATOR'],
-                address=object['ADDRESS'],
-                admin=True,
-                )
+    def importUpload(self):
+        #absolute file path parsed to find uploaded file
+        file_path = os.path.abspath('media/' + self.docfile.name).replace("\\", "/")
+        with open(file_path) as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                _, imported = ChargingStation.objects.get_or_create(
+                    lat=row['LATITUDE'],
+                    lon=row['LONGITUDE'],
+                    operator=row['LOT_OPERATOR'],
+                    address=row['ADDRESS'],
+                    admin=True,
+                    )
 
 # handles deleting media file for upload deletes
 @receiver(pre_delete, sender=Upload)
 def upload_delete(sender, instance, **kwargs):
     instance.docfile.delete(False)
-
-class FacebookStatus(models.Model):
-
-    class Meta:
-        verbose_name_plural = 'Facebook Statuses'
-        ordering = ['publish_timestamp']
-
-    STATUS = (
-        ('draft', 'Draft'),
-        ('approved', 'Approved'),
-    )
-    status = models.CharField(max_length=255, 
-        choices=STATUS, default=STATUS[0][0])
-    publish_timestamp = models.DateTimeField(null=True, blank=True)
-    author = models.ForeignKey(User)
-    message = models.TextField(max_length=255)
-    link = models.URLField(null=True, blank=True)
-
-    def __unicode__(self):
-        return self.message

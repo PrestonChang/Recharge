@@ -2,3 +2,62 @@ td,
 th {
   padding: 5px;
 }
+
+body {
+	left:0 ;
+	margin: 0;
+	overflow: hidden;
+	position: relative;
+}
+
+.nav {
+	background-color: #80ffcc;
+
+}
+
+.nav a {
+	color: #5a5a5a;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 14px 10px;
+	text-transform: uppercase;
+
+}
+
+.nav li {
+	display: inline;
+}
+
+.sidebar-nav a{
+	color: #000000;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 14px 10px;
+	text-transform: uppercase;
+}
+
+.sidebar-nav {
+	background: #666666;
+  	left: -285px;  /* start off behind the scenes */
+ 	height: 100%;
+ 	position: fixed;
+ 	width: 285px;
+}
+
+.icon-menu {
+	color: #000000;
+	cursor: pointer;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	padding-bottom: 25px;
+	padding-left: 25px;
+	padding-top: 25px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.icon-close {
+	cursor: pointer;
+	padding-left: 10px;
+	padding-top: 10px;
+}

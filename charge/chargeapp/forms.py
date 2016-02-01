@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserProfile, ChargingStation
+from .models import UserProfile
 
 class CreateUserForm(forms.Form):
     username = forms.CharField(label='Username', max_length=30)
@@ -30,9 +30,6 @@ class UploadForm(forms.Form):
         help_text='please select a csv file for upload'
     )
 
-class StationForm(forms.Form):
-    station_identification = forms.ModelChoiceField(queryset=ChargingStation.objects.all())
-
 class NewChargingStationForm(forms.Form):
     lat = forms.DecimalField(min_value=49.201301, max_value=49.361247, label='Latitude', max_digits=20, decimal_places=15)
     lon = forms.DecimalField(min_value=-123.274155, max_value=-123.023314, label='Longitude', max_digits=20, decimal_places=15)
@@ -42,3 +39,9 @@ class NewChargingStationForm(forms.Form):
 class UseChargingStationForm(forms.Form):
     station_id = forms.CharField(label='ID', max_length=3)
     time_used = forms.IntegerField(label='Hours', min_value=0)
+
+class FilterChargingStationForm(forms.Form):
+    #should use geocoding
+    lat = forms.DecimalField(min_value=49.201301, max_value=49.361247, label='Latitude', max_digits=20, decimal_places=15)
+    lon = forms.DecimalField(min_value=-123.274155, max_value=-123.023314, label='Longitude', max_digits=20, decimal_places=15)
+    range = forms.IntegerField(label='Range', min_value=0)
