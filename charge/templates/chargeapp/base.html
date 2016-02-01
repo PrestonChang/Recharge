@@ -28,11 +28,15 @@
         <div class="container">
             <ul class="pull-left">
                 <li class="icon-menu"><a>Menu</a></li>
-                <li><a href="/chargeapp/maps">Recharge</a></li>
+                <li class="header"><a href="/chargeapp/maps">Recharge</a></li>
             </ul>
             <ul class="pull-right">
-                <li><a href="/chargeapp/create-user">Sign Up</a></li>
-                <li><a href="/chargeapp/login">Login</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="/chargeapp/profile">My Profile</a></li>
+                {% else %}
+                    <li><a href="/chargeapp/create-user">Sign Up</a></li>
+                    <li><a href="/chargeapp/login">Login</a></li>
+                 {% endif %}
             </ul>
         </div>
     </div>
@@ -64,21 +68,20 @@
                     <div class="icon-close">
                         <img src="http://i.stack.imgur.com/vDH0q.png"> <!--Replace img source -->
                     </div>
+                    <li><a href="/chargeapp/maps">Map all charging stations</a></li>
+                    <li><a href="/chargeapp/list">List all charging stations</a></li>
+                    <!-- Make it so only logged in users can add a station?-->
+                    <li><a href="/chargeapp/new-charging-station">Add a new charging station</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="/chargeapp/profile">My Profile</a></li>
                         {% if user.is_superuser %}
                         <li><a href="/chargeapp/upload">Upload file</a></li>
                         <li><a href="/chargeapp/delete">Deletion</a></li>
                         {% endif %}
-                        <hr/>
-                    {% endif %}
-                    <li><a href="/chargeapp/maps">Map all charging stations</a></li>
-                    <li><a href="/chargeapp/list">List all charging stations</a></li>
-                    <li><a href="/chargeapp/new-charging-station">Add a new charging station</a></li>
-                    <li><a href="/chargeapp/login">Login</a></li>
-                    {% if user.is_authenticated %}
-                    <li><a href="/chargeapp/use-charging-station">Use charging stations</a></li>
-                    <li><a href="/chargeapp/logout">Logout</a></li>
+                        <li><a href="/chargeapp/use-charging-station">Use charging stations</a></li>
+                        <li><a href="/chargeapp/logout">Logout</a></li>
+                        <!-- <hr/> line in menu-->
+                    {% else %}
+                        <li><a href="/chargeapp/login">Login</a></li>
                     {% endif %}
                 </ul>
             </div>

@@ -3,7 +3,24 @@
 {% load staticfiles %}
 
 {% block content %}
-<form id="form" onsubmit="return false;">
+<div class="filter">
+  <form class="form-inline" id="form" onsubmit="return false;">
+    <div class="form-group">
+      <label for"latitude">Latitude</label>
+      <input type="text" class="form-control" id="latitude" placeholder="49.2827">
+    </div>
+    <div class="form-group">
+      <label for"longitude">Longitude</label>
+      <input type="text" class="form-control" id="longitude" placeholder="-123.1207">
+    </div>
+    <div class="form-group">
+      <label for"range">Range</label>
+      <input type="text" class="form-control" id="range" placeholder="Kilometres">
+    </div>
+    <button type="submit" onclick="filter();" class="btn btn-default">Filter</button>
+  </form>
+</div>
+<!-- <form id="form" onsubmit="return false;">
     <label for="latitude">Latitude</label>
     <input style="position:absolute; top:90%; left:1%; width:10%;" type="text" id="latitude" />
     <label for="longitude">Longitude</label>
@@ -11,9 +28,9 @@
     <label for="longitude">Range</label>
     <input style="position:absolute; top:90%; left:23%; width:10%;" type="text" id="range" />
     <input style="position:absolute; top:90%; left:34%; width:10%;" type="submit" onclick="filter();" />
-</form>
+</form> -->
 
-<div id="googleMap" style="position:absolute; top:250%; left:0%; width:100%;min-width:600px;min-height:700px;"></div>
+<div id="googleMap" style="position:absolute; top:250%; left:0%; width:100%;min-width:600px;min-height:600px;"></div>
 
 <script src="http://maps.googleapis.com/maps/api/js?libraries=geometry"></script>
 <script>
