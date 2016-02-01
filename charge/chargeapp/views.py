@@ -153,16 +153,16 @@ def delete(request):
     if (request.method == 'POST'):
         if request.POST.get('delete_cs'):
             ChargingStation.objects.all().delete()
-
+            messages.success(request, 'Deleted All Charging Stations')
         elif request.POST.get('delete_upload'):
             Upload.objects.all().delete()
-
+            messages.success(request, 'Deleted Uploads')
         elif request.POST.get('delete_admin'):
             ChargingStation.objects.filter(admin=True).delete()
-
+            messages.success(request, 'Deleted Admin Stations')
         elif request.POST.get('delete_user'):
             ChargingStation.objects.filter(admin=False).delete()
-
+            messages.success(request, 'Deleted User Stations')
     return render(request, 'chargeapp/delete.html')
 
 def logout_view(request):
@@ -185,23 +185,3 @@ def use_charging_station(request):
         form = UseChargingStationForm()
 
     return render(request, 'chargeapp/use-charging-station.html', {'form': form})
-
-
-# class filter {
-
-#     #list or map
-    
-#     def filter_by_location(request) {
-#         if (request.method==)
-
-
-
-#         charging_stations = ChargingStation.objects.all()
-#         if (request.user.is_authenticated() and request.user.userprofile.admin_data_only):
-#             charging_stations = ChargingStation.objects.all().filter(admin=True)
-#         return render(request, "chargeapp/maps.html", {'charging_stations' : charging_stations, 'form' : form})
-#         #return charging stations and form
-#         #do distance calculation in frontend
-
-#     }
-# }
