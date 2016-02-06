@@ -41,7 +41,6 @@ class UseChargingStationForm(forms.Form):
     time_used = forms.IntegerField(label='Hours', min_value=0)
 
 class FilterChargingStationForm(forms.Form):
-    #should use geocoding
     lat = forms.DecimalField(min_value=49.201301, max_value=49.361247, label='Latitude', max_digits=20, decimal_places=15)
     lon = forms.DecimalField(min_value=-123.274155, max_value=-123.023314, label='Longitude', max_digits=20, decimal_places=15)
     range = forms.IntegerField(label='Range', min_value=0)

@@ -22,17 +22,17 @@ body {
 	padding: 20px 10px;
 	text-transform: uppercase;
 	position: relative;
-	top: 12px;
+	top: 13px;
 }
 
 .nav .pull-left {
 	position: relative;
-	left: -140px;
+	left: -165px;
 }
 
 .nav .pull-right {
 	position: relative;
-	left: 70px;
+	left: 80px;
 }
 
 .nav li {
@@ -50,12 +50,13 @@ body {
 .sidebar-nav li {
 	list-style-type: none;
 	position: relative;
-	left: -20px;
-	margin: 0 0 10px 0;
+	top: 30px;
+	left: 5px;
+	margin: 0 0 20px 0;
 }
 
 .sidebar-nav {
-	background: #bfbfbf;
+	background: #cccccc;
   	left: -285px;  /* start off behind the scenes */
  	height: 100%;
  	position: fixed;
@@ -67,13 +68,11 @@ body {
 .icon-menu {
 	color: #000000;
 	cursor: pointer;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 16px;
 	padding-bottom: 25px;
 	padding-left: 25px;
 	padding-top: 25px;
-	text-decoration: none;
-	text-transform: uppercase;
+	position: relative;
+	top: 12px;
 }
 
 .icon-close {
@@ -81,14 +80,19 @@ body {
 	padding-top: 5px;
 	padding-bottom: 5px;
 	position: relative;
+	top: 12px;
 	left: -20px;
 }
 
 .header {
-	margin: auto;
+	/*margin: auto;*/
+/*	margin-left: auto;
+    margin-right: auto;*/
+    position: relative;
+	left: 20px;
 }
 
 .filter {
-	padding-top: 10px;
-	margin-bottom: -20px;
+	padding-top: 11px;
+	margin-bottom: -21px;
 }

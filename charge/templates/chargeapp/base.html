@@ -18,14 +18,14 @@
     <!-- Custom CSS -->
     <link href="{% static "css/simple-sidebar.css" %}" rel="stylesheet">
 
-    <link href="{% static "css/custom.css" %}" rel="stylesheet">
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
 
 </head>
 <body>
     <div class="nav">
         <div class="container">
             <ul class="pull-left">
-                <li class="icon-menu"><a>Menu</a></li>
+                <li class="icon-menu"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAlklEQVQ4T82TwQ0CMQwEd9PItUAH8I4cQQdQGpSAkgJyndz1EcXICCR4xscDS5b8iMdeZU0AEJEDSbV6JHLOM1NKFcB+pPH9VlWrAYYnfw4zwAWApSeu9HR9bbAZEGPchRCOHlDv/U4RWUhOHgCAZRNAVVe+JJw8G7TW/uEXzEiqevZIIHn7iZXdxwRgflrZztkjoZRSH/PYL0UesTTbAAAAAElFTkSuQmCC"/></li>
                 <li class="header"><a href="/chargeapp/maps">Recharge</a></li>
             </ul>
             <ul class="pull-right">
@@ -64,7 +64,7 @@
 
                 <ul class="sidebar-nav">
                     <div class="icon-close">
-                        <img src="http://i.stack.imgur.com/vDH0q.png"> <!--Replace img source -->
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA70lEQVQ4T42TwRHCIBBF/4YCtANbsAS9ZsKMdmAJWol2oqdctQRLiB2QAgjOZiCDYSHmCLyXZfdDWusTgCsAY609tm37RuGr63qrlLoDWAO4kNbaAFh5hiX7nMTDTw8zYqhpmo6INtFPRYkAwzn3Ib/xiqoYzXElEgygt9buiE+XJLyvlIrL5qUR5quOgpLEb3PDwjfBvDAJCpJ4Jj9wIliQJHBJML9z0thQlnQFCQ7nkxHPm5h025MhaEkl8RjFUfkxZnMSgpSd81JOpCiL3c6ErZs/JhEuhK1nAT/nm3PODMNw+Oc5V1X1ICJO5/kLbO+98o53jmMAAAAASUVORK5CYII="/>
                     </div>
                     <li><a href="/chargeapp/maps">Map all charging stations</a></li>
                     <li><a href="/chargeapp/list">List all charging stations</a></li>
@@ -118,6 +118,9 @@
         $("#wrapper").toggleClass("toggled");
     });
     </script>
+
+    <!-- <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>             is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div> -->
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{% static "js/app.js" %}"></script>
 </body>
